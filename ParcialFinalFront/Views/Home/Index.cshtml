@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ParcialFinalFront.Models.AnuncioModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Ofertas de trabajo</h1>
+    <p class="lead">Aqui encontraras las mejores ofertas de trabajo para tu que eres independiente.</p>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+    <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.nombre)</h5>
+                <h6 class="card-subtitle mb-2 text-muted"> $ @Html.DisplayFor(modelItem => item.precio)</h6>
+                <p class="card-text"> @Html.DisplayFor(modelItem => item.descripcion)</p>
+                <a href="/Home/Details/@Html.DisplayFor(modelItem => item.idUsuario)" class="btn btn-success">Ver mas</a>
+            </div>
+        </div>
+    </div>
+    }
+    </div>

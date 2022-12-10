@@ -1,0 +1,72 @@
+﻿@model ParcialFinalFront.Models.AnuncioModel
+
+@{
+    ViewBag.Title = "";
+}
+
+<div>
+    <hr />
+    <div class="jumbotron">
+        <h1 class="display-4"> @Html.DisplayFor(model => model.nombre)</h1>
+        <p class="lead">$ @Html.DisplayFor(model => model.precio)</p>
+        <hr class="my-4">
+        <p>@Html.DisplayFor(model => model.descripcion)</p>
+        <hr class="my-4">
+        <p class="lead">Categoria: @Html.DisplayFor(model => model.categoriaN)</p>
+        <p class="lead">Propietario: @Html.DisplayFor(model => model.usuarioN)</p>
+    </div>
+
+</div>
+<h1 class="display-4"> Postularse</h1>
+
+<form  class="row">
+    <div class="mb-4 col-md-4">
+        <label class="form-label" for="form2Example18">Dui</label>
+        <input type="text" id="dui" class="form-control form-control-lg" />
+    </div>
+
+    <div class="mb-4 col-md-4">
+        <label class="form-label" for="solvencia">Solvencia PNC</label>
+        <input type="file" id="solvencia" class="form-control form-control-lg" />
+    </div>
+
+    <div class="mb-4 col-md-4">
+        <label class="form-label" for="solvencia">Antecedentes Penales</label>
+        <input type="file" id="antecendentes" class="form-control form-control-lg" />
+    </div>
+
+    <div class="mb-4 col-md-12" style="text-align: -webkit-center;">
+        <label for="exampleFormControlTextarea1">Referencias</label>
+        <textarea class="form-control" id="referencias" rows="5"></textarea>
+    </div>
+
+    <div class="pt-1 mb-4" style="text-align: -webkit-center;">
+        <span class="btn btn-success btn-lg btn-block" id="frm">
+            Postularte
+        </span>
+    </div>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#frm").click(function (e) {
+            let url = "@Url.Content("~/Home/Details/CreatePostulacion")"
+            let parametros = {
+                "dui": $("#dui").val(),
+                "referencias": $("#referencias").val(),
+                "idAnuncio": @Html.DisplayFor(model => model.idAnuncio)
+            }
+
+            $.post(url, parametros, function (data) {
+                console.log(data)
+                if (data === "1") {
+                    document.location.href = "@Url.Content("~/Home/Index")";
+                } else {
+                    alert("Error en postularte ");
+                }
+
+            }).catch((e) => console.log(e))
+         })
+    })
+    
+</script>
